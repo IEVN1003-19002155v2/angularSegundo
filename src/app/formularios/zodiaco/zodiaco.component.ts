@@ -38,7 +38,7 @@ export class ZodiacoComponent {
     this.amaterno = amaterno;
 
     const fechaNacimiento = new Date(anio, mes - 1, dia);
-    this.edad = this.calcularEdad(fechaNacimiento);
+    this.edad = this.calEdad(fechaNacimiento);
 
     this.signoZodiacal = this.obtenerSignoChino(anio);
     this.imagenSigno = this.getSignoImagen(this.signoZodiacal);
@@ -46,7 +46,7 @@ export class ZodiacoComponent {
     this.showResults = true;
   }
 
-  calcularEdad(fechaNacimiento: Date): number {
+  calEdad(fechaNacimiento: Date): number {
     const diff = Date.now() - fechaNacimiento.getTime();
     const ageDate = new Date(diff);
     return Math.abs(ageDate.getUTCFullYear() - 1970);
