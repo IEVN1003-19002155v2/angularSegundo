@@ -8,5 +8,13 @@ export default[
     {
         path: 'zodiaco',
         loadComponent: () =>import('./zodiaco/zodiaco.component'),
+    },
+    {
+        path: 'resistencia2',
+        loadComponent: () =>import('./resistencia2/resistencia2.component'),
+    },
+    {
+        path: 'empleados',
+        loadComponent: () =>import('./empleados/empleados.component'),
     }
 ]as Routes

@@ -1,0 +1,75 @@
+<div style="text-align: center;">
+  <h1>Calculadora Resistencias</h1><br>
+
+  <!-- Formulario para seleccionar los colores y la tolerancia -->
+  <form [formGroup]="resistenciaForm" (ngSubmit)="registrar()">
+      <div style="display: flex; justify-content: center; gap: 20px; align-items: center;">
+          <!-- Primer Banda -->
+          <div style="text-align: center;">
+              <label for="color1">Primer Banda</label>
+              <select id="color1" formControlName="color1">
+                  <option *ngFor="let color of colors" [value]="color">{{color}}</option>
+              </select>
+          </div>
+          
+          <!-- Segunda Banda -->
+          <div style="text-align: center;">
+              <label for="color2">Segunda Banda</label>
+              <select id="color2" formControlName="color2">
+                  <option *ngFor="let color of colors" [value]="color">{{color}}</option>
+              </select>
+          </div>
+
+          <!-- Tercera Banda -->
+          <div style="text-align: center;">
+              <label for="color3">Tercera Banda</label>
+              <select id="color3" formControlName="color3">
+                  <option *ngFor="let color of colors" [value]="color">{{color}}</option>
+              </select>
+          </div>
+      </div>
+
+      <!-- Tolerancia -->
+      <div style="margin-top: 50px;">
+          <p>Tolerancia</p>
+          <label>
+              <input type="radio" formControlName="tolerancia" value="oro"> Oro
+          </label>
+          <label>
+              <input type="radio" formControlName="tolerancia" value="plata"> Plata
+          </label>
+      </div>
+
+      <button type="submit" style="margin-top: 20px;">Registrar</button>
+  </form>
+
+  <button (click)="imprimir()" style="margin-top: 20px;">Imprimir</button>
+
+  <!-- Mostrar resultados solo después de hacer clic en "Imprimir" -->
+  <div *ngIf="mostrarValoresCompletos">
+      <table border="1" style="margin-top: 20px; margin-left: auto; margin-right: auto; border-spacing: 10px; border-collapse: separate;">
+          <thead>
+              <tr>
+                  <th>Color1</th>
+                  <th>Color2</th>
+                  <th>Color3</th>
+                  <th>Tolerancia</th>
+                  <th>Valor</th>
+                  <th>Valor Máximo</th>
+                  <th>Valor Mínimo</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let resistencia of resistencias">
+                  <td [ngStyle]="{'background-color': getColorCode(resistencia.color1), 'padding': '10px'}">{{resistencia.color1}}</td>
+                  <td [ngStyle]="{'background-color': getColorCode(resistencia.color2), 'padding': '10px'}">{{resistencia.color2}}</td>
+                  <td [ngStyle]="{'background-color': getColorCode(resistencia.color3), 'padding': '10px'}">{{resistencia.color3}}</td>
+                  <td [ngStyle]="{'background-color': getToleranceColor(resistencia.tolerancia), 'padding': '10px'}">{{resistencia.tolerancia}}</td>
+                  <td>{{resistencia.valor}} Ω</td>
+                  <td>{{resistencia.valorMax}} Ω</td>
+                  <td>{{resistencia.valorMin}} Ω</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
